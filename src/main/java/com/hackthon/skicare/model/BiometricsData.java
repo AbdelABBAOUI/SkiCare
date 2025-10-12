@@ -1,4 +1,4 @@
-package com.hackthon.skicare;
+package com.hackthon.skicare.model;
 
 import java.time.LocalDateTime;
 
@@ -17,8 +17,8 @@ public class BiometricsData {
 
   // --- Données de Mouvement et de Localisation ---
   private double vitesse; // Double pour plus de précision
-  private boolean chute; // Type boolean pour une détection Oui/Non
-  private boolean immobilité; // Type boolean
+  public boolean chute; // Type boolean pour une détection Oui/Non
+  public boolean immobilite; // Type boolean
   private String gps; // Stockage de la localisation GPS (ex: "lat,lon")
 
   // --- Données Environnementales ---
@@ -32,16 +32,10 @@ public class BiometricsData {
   private LocalDateTime timestamp;
 
 
-  /**
-   * Constructeur par défaut (nécessaire pour la désérialisation par Jackson/Spring)
-   */
   public BiometricsData() {
     this.timestamp = LocalDateTime.now();
   }
 
-  /**
-   * Constructeur partiel pour faciliter la création des données initiales.
-   */
   public BiometricsData(int frequenceCardiaque, double temperatureCutanee, int frequenceRespiratoire, int saturationOxygene, double temperatureAmb) {
     this.frequenceCardiaque = frequenceCardiaque;
     this.temperatureCutanee = temperatureCutanee;
@@ -51,11 +45,6 @@ public class BiometricsData {
     this.timestamp = LocalDateTime.now();
   }
 
-  // ====================================================================
-  // Getters et Setters (Respectant la convention Java: getNomDuChamp)
-  // ====================================================================
-
-  // --- Physiologique ---
 
   public int getFrequenceCardiaque() {
     return frequenceCardiaque;
@@ -97,8 +86,6 @@ public class BiometricsData {
     this.variabiliteFrequenceCardiaque = variabiliteFrequenceCardiaque;
   }
 
-  // --- Mouvement et Localisation ---
-
   public double getVitesse() {
     return vitesse;
   }
@@ -107,20 +94,16 @@ public class BiometricsData {
     this.vitesse = vitesse;
   }
 
-  public boolean isChute() { // Utilisation de 'is' pour les booléens est la convention
-    return chute;
-  }
+  public boolean isChute() { return chute; }
 
   public void setChute(boolean chute) {
     this.chute = chute;
   }
 
-  public boolean isImmobilité() { // Utilisation de 'is' pour les booléens
-    return immobilité;
-  }
+  public boolean isImmobilite() { return immobilite; }
 
-  public void setImmobilité(boolean immobilité) {
-    this.immobilité = immobilité;
+  public void setImmobilite(boolean immobilite) {
+    this.immobilite = immobilite;
   }
 
   public String getGps() {
@@ -130,8 +113,6 @@ public class BiometricsData {
   public void setGps(String gps) {
     this.gps = gps;
   }
-
-  // --- Environnementales ---
 
   public double getTemperatureAmb() {
     return temperatureAmb;
@@ -165,8 +146,6 @@ public class BiometricsData {
     this.scoreEwsPartiel = scoreEwsPartiel;
   }
 
-  // --- Horodatage ---
-
   public LocalDateTime getTimestamp() {
     return timestamp;
   }
@@ -174,6 +153,8 @@ public class BiometricsData {
   public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
   }
+
+
 
   public int calculerScorePartielEWS() {
     int scoreTotal = 0;
